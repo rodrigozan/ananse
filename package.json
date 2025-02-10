@@ -2,7 +2,7 @@
   "name": "ananse",
   "version": "1.0.0",
   "description": "",
-  "main": "src/conf/server.js",
+  "main": "index.js",
   "scripts": {},
   "keywords": [],
   "author": "",
