@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
 
-import initializeDatabase from '../conf/db-init';
+import initializeDatabase from './database/db-init';
 
-import { startServer } from '../conf/express';
+import { startServer } from './conf/express';
 
 dotenv.config();
 
