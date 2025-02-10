@@ -12,7 +12,7 @@ export function startServer(port: number | string): Promise<void> {
         app.use(morgan('dev')); // Logs das requisições
 
         // Rota de teste
-        app.get('/', (req: Request, res: Response) => {
+        app.get('/', (_req: Request, res: Response) => {
             res.status(200).json({ message: 'Bem-vindo à plataforma Ananse!' });
         });
 
