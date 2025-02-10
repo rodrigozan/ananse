@@ -1,0 +1,10 @@
+{
+  "name": "ananse",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/conf/server.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
