@@ -1,16 +1,17 @@
-import { config } from 'dotenv';
+import dotenv from 'dotenv';
 
 import initializeDatabase from '../conf/db-init';
 
 import { startServer } from '../conf/express';
 
+dotenv.config();
+
+
 async function main() {
     try {
-        // Inicializa o banco de dados
         await initializeDatabase();
         console.log('Banco de dados inicializado com sucesso.');
 
-        // Inicia o servidor Express
         const port = process.env.PORT || 3000;
         await startServer(port);
         console.log(`Servidor rodando na porta ${port}.`);
