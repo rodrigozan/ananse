@@ -2,10 +2,9 @@ import bcrypt from 'bcryptjs'
 import { Types } from 'mongoose';
 
 import { UserModel } from '../models/UserModel'
-
 export class UserService {
 
-    static async create(data: any) {
+    public async create(data: any) {
         try {
 
             const hashedPassword = await bcrypt.hash(data.password, 8)
@@ -22,7 +21,7 @@ export class UserService {
    
     }
 
-    static async find() {
+    public async find() {
         try {
             return await UserModel.find()
         } catch (error){
@@ -32,7 +31,7 @@ export class UserService {
         
     }
 
-    static async findUserById(id: Types.ObjectId, data: string) {
+    public async findUserById(id: Types.ObjectId, data: string) {
         try {
             return await UserModel.findById(id, data)
         } catch (error){
@@ -42,7 +41,7 @@ export class UserService {
         
     }
 
-    static async update(id: Types.ObjectId, data: any) {
+    public async update(id: Types.ObjectId, data: any) {
         try {
             return await UserModel.findByIdAndUpdate(id, data, { new: true })
         } catch (error){
@@ -52,7 +51,7 @@ export class UserService {
         
     }
 
-    static async delete(id: Types.ObjectId) {
+    public async delete(id: Types.ObjectId) {
         try {
             return await UserModel.findByIdAndDelete(id)
         } catch (error){
@@ -62,4 +61,6 @@ export class UserService {
     }
     
 }
+
+export const userServiceInstance = new UserService();
 
