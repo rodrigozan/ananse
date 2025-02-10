@@ -4,9 +4,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const DB_NAME = process.env.MONGODB_DATABASE;
-const MONGO_URI = 'mongodb://localhost:27017'; // Altere conforme necessário
+const MONGO_URI = 'mongodb://localhost:27017';
 
-async function initializeDatabase(): Promise<void> {
+const initializeDatabase = async (): Promise<void> => {
     const client = new MongoClient(MONGO_URI);
 
     try {
@@ -39,4 +39,4 @@ async function initializeDatabase(): Promise<void> {
     }
 }
 
-export default initializeDatabase();
+export default initializeDatabase;
