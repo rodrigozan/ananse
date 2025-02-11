@@ -1,4 +1,4 @@
-import { IBook } from "../interfaces/i-book";
+import { IBook } from "../interfaces/IBook";
 
 export class StoryModel implements IBook {
     title: string;
