@@ -1,82 +1,71 @@
 import { Request, Response } from 'express';
 import { Types } from 'mongoose';
 
+import IUser from '../interfaces/IUser';
+
 import { UserService, userServiceInstance } from '../services/UserService';
 
+import { BaseController } from './BaseController';
 
-class UserController {
-    private service: UserService;
+import handleError from '../utils/errors.utils';
+
+
+
+class UserController extends BaseController<IUser> {
+    private userService: UserService;
 
     constructor(service: UserService) {
-        this.service = service;
+        super(service);
+        this.userService = service;
     }
 
-    public async create(req: Request, res: Response) {
+    public async create(req: Request, res: Response): Promise<Response> {
         try {
-            const user = await this.service.create(req.body);
-            return res.status(201).send(user);
+            const user = await this.userService.create(req.body);
+            return res.status(201).json(user);
         } catch (error) {
-            console.log('Error in controller: ', error.message);
-            return res.status(500).send(error.message);
+            return handleError(res, error);
         }
     }
 
-    public async get(_req: Request, res: Response) {
+    public async createMultiple(req: Request, res: Response): Promise<Response> {
         try {
-            const users = await this.service.find();
-            return res.status(200).json(users);
+            const users = await this.userService.createMultiple(req.body);
+            return res.status(201).json(users);
         } catch (error) {
-            console.error(error);
-            return res.status(500).json({ message: 'Error fetching users' });
+            return handleError(res, error);
         }
     }
 
-    public async getUser(req: Request, res: Response) {
+    public async findUserById(req: Request, res: Response): Promise<Response> {
         try {
-            const objectId = new Types.ObjectId(req.params.id);
-            const user = await this.service.findUserById(objectId, '');
+            const id = this.validateId(req, res);
+            if (!id) return res; 
+
+            const user = await this.userService.findUserById(new Types.ObjectId(id), '');
             if (!user) {
-                return res.status(404).send();
+                return res.status(404).json({ message: 'User not found' });
             }
-            return res.status(200).send(user);
+            return res.status(200).json(user);
         } catch (error) {
-            return res.status(500).send(error);
+            return handleError(res, error);
         }
     }
 
     public async update(req: Request, res: Response) {
         try {
-            const { name, email } = req.body;
-            const body = { name, email };
-            const objectId = new Types.ObjectId(req.params.id);
-            const user = await this.service.update(objectId, body);
-            if (!user) {
-                return res.status(404).send();
-            }
-            return res.status(200).send(user);
-        } catch (error) {
-            return res.status(500).json({
-                name: error.name,
-                message: error.message,
-                stack: error.stack
-            });
-        }
-    }
+            const { name, email, phone, active, role } = req.body
+            const body = { name, email, phone, active, role }
 
-    public async delete(req: Request, res: Response) {
-        try {
-            const objectId = new Types.ObjectId(req.params.id);
-            const user = await this.service.delete(objectId);
+            const id = this.validateId(req, res);
+            if (!id) return res;
+            const user = await this.userService.update(id, body)
             if (!user) {
                 return res.status(404).send();
             }
             return res.status(200).send(user);
         } catch (error) {
-            return res.status(500).json({
-                name: error.name,
-                message: error.message,
-                stack: error.stack
-            });
+            return handleError(res, error);
         }
     }
 }

@@ -40,6 +40,42 @@ router.post('/users', userController.create.bind(userController));
 
 /**
  * @openapi
+ * /api/users/multiple:
+ *   post:
+ *     summary: Cria múltiplos usuários
+ *     tags:
+ *       - Users
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: array
+ *             items:
+ *               type: object
+ *               properties:
+ *                 name:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 password:
+ *                   type: string
+ *                 celular:
+ *                   type: string
+ *                 active:
+ *                   type: boolean
+ *                 role:
+ *                   type: string
+ *     responses:
+ *       201:
+ *         description: Usuários criados com sucesso
+ *       400:
+ *         description: Erro na criação dos usuários
+ */
+router.post('/users/multiple', userController.createMultiple.bind(userController));
+
+/**
+ * @openapi
  * /api/users:
  *   get:
  *     summary: Obtém a lista de todos os usuários
@@ -108,7 +144,7 @@ router.get('/users', userController.get.bind(userController));
  *       404:
  *         description: Usuário não encontrado
  */
-router.get('/users/:id', userController.getUser.bind(userController));
+router.get('/users/:id', userController.get.bind(userController));
 
 /**
  * @openapi
