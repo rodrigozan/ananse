@@ -4,6 +4,8 @@ export interface IBook {
     shortDescription: string;
     summary: string;
     coverImage: string;
+    genre: string;
+    subgenre: string;
     centralConflict: string;
     characters: {
         protagonists: string[];

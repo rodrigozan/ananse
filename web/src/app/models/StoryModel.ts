@@ -6,6 +6,8 @@ export class StoryModel implements IBook {
     shortDescription: string;
     summary: string;
     coverImage: string;
+    genre: string;
+    subgenre: string;
     centralConflict: string;
     characters: {
         protagonists: string[];
@@ -30,6 +32,8 @@ export class StoryModel implements IBook {
         this.shortDescription = data.shortDescription;
         this.summary = data.summary;
         this.coverImage = data.coverImage;
+        this.genre = data.genre;
+        this.subgenre = data.subgenre;
         this.centralConflict = data.centralConflict;
         this.characters = data.characters;
         this.literaryStructure = data.literaryStructure;
