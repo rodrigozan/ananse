@@ -1,2 +1,53 @@
+# Ignorar arquivos de ambiente da API
+/api/.env
+/api/.env.production
+
+# Ignorar arquivos de ambiente do Angular
+/app/src/environments/environment.ts
+/app/src/environments/environment.prod.ts
+
+# Ignorar node_modules em ambas as pastas
+/node_modules
+/app/node_modules
 /api/node_modules
 
+# Ignorar pastas de build/dist
+/dist
+/app/dist
+/api/dist
+
+# Ignorar cache e logs
+/.angular/cache
+/.vscode
+/.idea
+*.log
+*.log.*
+
+# Ignorar arquivos de configuração local
+*.local
+
+# Ignorar arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos de IDE
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ignorar arquivos de dependências
+package-lock.json
+yarn.lock
+
+# Ignorar arquivos de cache do npm/yarn
+.npm
+.yarn
+.yarnrc
+.yarn-integrity
+
+# Ignorar arquivos de configuração do Angular
+.angular/
