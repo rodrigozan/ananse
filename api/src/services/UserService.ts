@@ -33,15 +33,18 @@ export class UserService extends BaseService<IUser> {
                     throw new Error('Password is required for all users');
                 }
                 const hashedPassword = await bcrypt.hash(user.password, 8);
+            
+                // Garante que não há um campo `_id` inválido
+                const { _id, ...userData } = user;
+            
                 return {
-                    ...user,
+                    ...userData,
                     password: hashedPassword,
                 };
             }));
-    
-            // Inserção em massa com lean() para evitar problemas de tipagem
+            
             const createdUsers = await this.model.insertMany(hashedUsers, { rawResult: false });
-            return createdUsers.map(user => user.toObject()) as (IUser & { _id: Types.ObjectId })[];
+            return createdUsers.map(user => user.toObject()) as (IUser & { _id: Types.ObjectId })[];            
     
         } catch (error) {
             console.error('Error in service: ', error.message);

@@ -28,7 +28,7 @@ class UserController extends BaseController<IUser> {
         }
     }
 
-    public async createMultiple(req: Request, res: Response): Promise<Response> {
+    public async createMultiple(req: Request, res: Response): Promise<Response> {        
         try {
             const users = await this.userService.createMultiple(req.body);
             return res.status(201).json(users);
@@ -37,7 +37,7 @@ class UserController extends BaseController<IUser> {
         }
     }
 
-    public async findUserById(req: Request, res: Response): Promise<Response> {
+    public async getById(req: Request, res: Response): Promise<Response> {
         try {
             const id = this.validateId(req, res);
             if (!id) return res; 

@@ -1,9 +1,10 @@
-import { Schema, model, Document } from 'mongoose';
+import { Schema, model, Document, Types } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 import IUser from 'src/interfaces/IUser';
 
 const UserSchema = new Schema<IUser>({
+    _id: { type: Types.ObjectId, auto: true }, // Garante que _id seja gerado corretamente
     name: {
         type: String,
         required: true
