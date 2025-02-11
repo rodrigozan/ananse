@@ -1,0 +1,6 @@
+<div class="genre-section">
+    <h2>{{ genre }}</h2>
+    <div class="stories-grid">
+        <app-story-card *ngFor="let story of stories" [story]="story"></app-story-card>
+    </div>
+</div>
