@@ -35,7 +35,7 @@ class AuthController {
     }
   }
 
-  static async verifyToken(req: Request, res: Response): Promise<Response> {
+  public async verifyToken(req: Request, res: Response): Promise<Response> {
     const token = req.headers['authorization'];
 
     if (!token) {
