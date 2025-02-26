@@ -30,7 +30,7 @@ export class App {
         this.server.use('/api', router);
         // Rota de teste
         this.server.get('/', (_req: express.Request, res: express.Response) => {
-            res.status(200).json({ message: 'Bem-vindo à plataforma Ananse!' });
+            res.status(200).json({ message: 'Welcome to Ananse API!' });
         });
     }
 
@@ -48,7 +48,7 @@ export function startServer(port: number | string): Promise<void> {
         const app = new App().server;
 
         app.listen(port, () => {
-            console.log(`Servidor rodando em http://localhost:${port}`);
+            console.log(`Server runing in http://localhost:${port}`);
             resolve();
         });
     });
