@@ -3,7 +3,7 @@ import { BaseController } from './BaseController';
 import { IBook } from '../interfaces/IBook';
 
 class BookController extends BaseController<IBook> {
-    private bookService: BookService;
+    public bookService: BookService;
 
     constructor(service: BookService) {
         super(service);
