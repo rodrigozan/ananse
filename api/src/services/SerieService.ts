@@ -1,6 +1,6 @@
 import { BaseService } from './BaseService';
-import { ISerie } from 'src/interfaces/ISerie';
-import { Serie } from 'src/models/SerieModel';
+import { ISerie } from '../interfaces/ISerie';
+import { Serie } from '../models/SerieModel';
 
 export class SerieService extends BaseService<ISerie> {
     constructor() {
