@@ -1,35 +1,41 @@
+import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET;
+export class AuthMiddleware {
+  private readonly jwtSecret: string;
 
-if (!JWT_SECRET) {
-  throw new Error("JWT_SECRET não está definido nas variáveis de ambiente.");
-}
-
-export const authMiddleware = (req: any, res: any, next: any) => {
-  const authHeader = req.headers['authorization'];
-
-  if (!authHeader) {
-    return res.status(401).json({ message: 'Token não fornecido.' });
+  constructor() {
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+      throw new Error("JWT_SECRET is not defined in environment variables.");
+    }
+    this.jwtSecret = secret;
   }
 
-  const token = authHeader.split(' ')[1];
+  public authenticate(req: Request, res: Response, next: NextFunction): void {
+    const authHeader = req.headers['authorization'];
 
-  if (!token) {
-    return res.status(401).json({ message: 'Token não fornecido.' });
-  }
+    if (!authHeader) {
+      res.status(401).json({ message: 'Not authorization.' });
+      return;
+    }
 
-  try {
-    const decoded = jwt.verify(token, JWT_SECRET as string);
-    (req as any).user = decoded;
-    next()
-  } catch (error) {
-    return res.status(401).json(
-      {
+    const token = authHeader.split(' ')[1];
+    if (!token) {
+      res.status(401).json({ message: 'Token not provided.' });
+      return;
+    }
+
+    try {
+      const decoded = jwt.verify(token, this.jwtSecret);
+      (req as any).user = decoded;
+      next();
+    } catch (error) {
+      res.status(401).json({
         name: error.name,
-        message: 'Token inválido ou expirado - ' + error.message,
-        stack: error.stack
-      }
-    );
+        message: `Invalid or expired token - ${error.message}`,
+        stack: error.stack,
+      });
+    }
   }
-};
+}
