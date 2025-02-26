@@ -1,6 +1,7 @@
 import { Router } from 'express';
+
+import { authenticate } from './index';
 import userController from '../controllers/UserController';
-//import { authMiddleware } from '../middlewares/AuthMiddleware';
 
 const router = Router();
 
@@ -36,7 +37,7 @@ const router = Router();
  *       400:
  *         description: Erro na criação do usuário
  */
-router.post('/users', userController.create.bind(userController));
+router.post('/users', authenticate, userController.create.bind(userController));
 
 /**
  * @openapi
@@ -72,7 +73,7 @@ router.post('/users', userController.create.bind(userController));
  *       400:
  *         description: Erro na criação dos usuários
  */
-router.post('/users/multiple', userController.createMultiple.bind(userController));
+router.post('/users/multiple', authenticate, userController.createMultiple.bind(userController));
 
 /**
  * @openapi
@@ -190,7 +191,7 @@ router.get('/users/:id', userController.getById.bind(userController));
  *     security:
  *       - bearerAuth: []
  */
-router.put('/users/:id', userController.update.bind(userController));
+router.put('/users/:id', authenticate, userController.update.bind(userController));
 
 /**
  * @openapi
@@ -213,6 +214,6 @@ router.put('/users/:id', userController.update.bind(userController));
  *     security:
  *       - bearerAuth: []
  */
-router.delete('/users/:id', userController.delete.bind(userController));
+router.delete('/users/:id', authenticate, userController.delete.bind(userController));
 
 export default router;

@@ -1,4 +1,6 @@
 import { Router } from 'express';
+
+import { authenticate } from './index';
 import characterController from '../controllers/CharacterController';
 
 const router = Router();
@@ -22,7 +24,7 @@ const router = Router();
  *       400:
  *         description: Erro na criação do personagem
  */
-router.post('/characters', characterController.create.bind(characterController));
+router.post('/characters', authenticate, characterController.create.bind(characterController));
 
 /**
  * @openapi
@@ -66,7 +68,7 @@ router.get('/characters', characterController.get.bind(characterController));
  *       404:
  *         description: Personagem não encontrado
  */
-router.get('/characters/:id', characterController.get.bind(characterController));
+router.get('/characters/:id', authenticate, characterController.get.bind(characterController));
 
 /**
  * @openapi
@@ -97,7 +99,7 @@ router.get('/characters/:id', characterController.get.bind(characterController))
  *     security:
  *       - bearerAuth: []
  */
-router.put('/characters/:id', characterController.update.bind(characterController));
+router.put('/characters/:id', authenticate, characterController.update.bind(characterController));
 
 /**
  * @openapi
@@ -120,6 +122,6 @@ router.put('/characters/:id', characterController.update.bind(characterControlle
  *     security:
  *       - bearerAuth: []
  */
-router.delete('/characters/:id', characterController.delete.bind(characterController));
+router.delete('/characters/:id', authenticate, characterController.delete.bind(characterController));
 
 export default router;
