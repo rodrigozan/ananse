@@ -37,7 +37,7 @@ const router = Router();
  *       400:
  *         description: Erro na criação do usuário
  */
-router.post('/users', authenticate, userController.create.bind(userController));
+router.post('/users', userController.create.bind(userController));
 
 /**
  * @openapi
@@ -73,7 +73,7 @@ router.post('/users', authenticate, userController.create.bind(userController));
  *       400:
  *         description: Erro na criação dos usuários
  */
-router.post('/users/multiple', authenticate, userController.createMultiple.bind(userController));
+router.post('/users/multiple', userController.createMultiple.bind(userController));
 
 /**
  * @openapi

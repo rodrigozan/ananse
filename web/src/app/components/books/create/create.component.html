@@ -1,0 +1,65 @@
+<app-header></app-header>
+
+<div class="create-book-container container mt-4">
+  <h2 class="text-center mb-4">Criar Novo Livro</h2>
+  <form (ngSubmit)="onSubmit()" class="card p-4 shadow">
+    <!-- Título -->
+    <div class="mb-3">
+      <label for="title" class="form-label">Título</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        [(ngModel)]="book.title"
+        class="form-control"
+        required
+      />
+    </div>
+
+    <!-- Descrição Curta -->
+    <div class="mb-3">
+      <label for="shortDescription" class="form-label">Descrição Curta</label>
+      <textarea
+        id="shortDescription"
+        name="shortDescription"
+        [(ngModel)]="book.shortDescription"
+        class="form-control"
+        rows="3"
+        required
+      ></textarea>
+    </div>
+
+    <!-- Resumo -->
+    <div class="mb-3">
+      <label for="summary" class="form-label">Resumo</label>
+      <textarea
+        id="summary"
+        name="summary"
+        [(ngModel)]="book.summary"
+        class="form-control"
+        rows="5"
+        required
+      ></textarea>
+    </div>
+
+    <!-- Conflito Central -->
+    <div class="mb-3">
+      <label for="centralConflict" class="form-label">Conflito Central</label>
+      <textarea
+        id="centralConflict"
+        name="centralConflict"
+        [(ngModel)]="book.centralConflict"
+        class="form-control"
+        rows="5"
+        required
+      ></textarea>
+    </div>
+
+    <!-- Botão de Envio -->
+    <div class="d-grid">
+      <button type="submit" class="btn btn-pink btn-lg">
+        Criar Livro
+      </button>
+    </div>
+  </form>
+</div>

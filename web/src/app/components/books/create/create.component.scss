@@ -1,0 +1,9 @@
+.btn-pink {
+    background-color: #e83e8c;
+    color: white;
+    border: none;
+  
+    &:hover {
+      background-color: darken(#e83e8c, 10%);
+    }
+  }

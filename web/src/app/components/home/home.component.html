@@ -1,12 +1,16 @@
 <app-header></app-header>
 
 <div class="container mt-4">
-    <h1>Histórias em Destaque</h1>
-    <div class="stories-grid">
-        <app-story-card *ngFor="let story of featuredStories" [story]="story"></app-story-card>
-    </div>
+    <app-auth-cta *ngIf="!authService.isAuthenticated()"></app-auth-cta>
+    
+    <div *ngIf="authService.isAuthenticated()">
+        <h1>Histórias em Destaque</h1>
+        <div class="stories-grid">
+            <app-story-card *ngFor="let story of featuredStories" [story]="story"></app-story-card>
+        </div>
 
-    <div *ngFor="let genre of genres">
-        <app-genre-highlight [genre]="genre.name" [stories]="genre.stories"></app-genre-highlight>
+        <div *ngFor="let genre of genres">
+            <app-genre-highlight [genre]="genre.name" [stories]="genre.stories"></app-genre-highlight>
+        </div>
     </div>
 </div>

@@ -1,0 +1,27 @@
+<app-header></app-header>
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Registro</h2>
+    <form (ngSubmit)="onSubmit()" class="card p-4 shadow">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nome</label>
+            <input type="text" id="name" name="name" [(ngModel)]="user.name" class="form-control"
+                required />
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" [(ngModel)]="user.email" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Senha</label>
+            <input type="password" id="password" name="password" [(ngModel)]="user.password" class="form-control"
+                required />
+        </div>
+
+        <div class="d-grid">
+            <button type="submit" class="btn btn-pink">Registrar</button>
+        </div>
+    </form>
+</div>
